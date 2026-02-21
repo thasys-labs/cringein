@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CringeIn — LinkedIn Post Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="app-wrapper">
+
+    <!-- LEFT PANEL: Controls -->
+    <aside class="controls-panel">
+      <div class="brand">
+        <div class="brand-logo">in</div>
+        <div class="brand-text">
+          <span class="brand-name">CringeIn</span>
+          <span class="brand-tagline">Thought Leadership as a Service</span>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <label class="field-label" for="topic-input">What are you posting about?</label>
+        <textarea
+          id="topic-input"
+          class="topic-input"
+          placeholder="e.g. I made a great cup of coffee this morning&#10;e.g. My 6-year-old asked me a question&#10;e.g. I got rejected from a job&#10;e.g. I went to the gym"
+          rows="4"
+        ></textarea>
+
+        <label class="field-label">Post Style</label>
+        <div class="post-types">
+          <label class="post-type-btn">
+            <input type="radio" name="post_type" value="humble_brag" checked />
+            <span>😇 Humble Brag</span>
+          </label>
+          <label class="post-type-btn">
+            <input type="radio" name="post_type" value="inspirational" />
+            <span>✨ Inspirational Journey</span>
+          </label>
+          <label class="post-type-btn">
+            <input type="radio" name="post_type" value="thought_leader" />
+            <span>🧠 Thought Leader</span>
+          </label>
+          <label class="post-type-btn">
+            <input type="radio" name="post_type" value="grind" />
+            <span>💪 Grind Culture</span>
+          </label>
+          <label class="post-type-btn">
+            <input type="radio" name="post_type" value="failure" />
+            <span>📈 Failure → Success</span>
+          </label>
+          <label class="post-type-btn">
+            <input type="radio" name="post_type" value="observation" />
+            <span>☕ Deep Observation</span>
+          </label>
+        </div>
+
+        <label class="field-label">
+          Cringe-O-Meter™
+          <span class="cringe-level-badge" id="cringe-badge">8 — Maximum Cringe</span>
+        </label>
+        <div class="slider-wrapper">
+          <input type="range" id="cringe-slider" min="1" max="10" value="8" class="cringe-slider" />
+          <div class="slider-labels">
+            <span>Mild</span>
+            <span><img src="spongebob-maximum-power.gif" class="spongebob-icon" alt="" /> LEGENDARY</span>
+          </div>
+        </div>
+
+        <button class="generate-btn" id="generate-btn" onclick="generatePost()">
+          <span class="btn-icon">🚀</span>
+          Generate Post
+        </button>
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL: LinkedIn post preview -->
+    <main class="preview-panel">
+
+      <div class="linkedin-feed-bg">
+        <div class="linkedin-post-card" id="post-card">
+
+          <!-- Post header -->
+          <div class="post-header">
+            <div class="post-avatar" id="post-avatar">CH</div>
+            <div class="post-author-info">
+              <div class="post-author-name" id="post-author-name">Chad Hustleworth</div>
+              <div class="post-author-title" id="post-author-title">Chief Disruption Officer | 7-Figure Entrepreneur | Speaker | Father of 3</div>
+              <div class="post-meta">Just now · <span class="globe-icon">🌍</span></div>
+            </div>
+            <button class="follow-btn">+ Follow</button>
+          </div>
+
+          <!-- Post content -->
+          <div class="post-content" id="post-content">
+            <div class="post-placeholder">
+              <div class="placeholder-icon">✍️</div>
+              <p>Your ultra cringe LinkedIn post will appear here.</p>
+              <p class="placeholder-sub">Enter a topic and hit Generate. You won't believe what we cook up.</p>
+            </div>
+          </div>
+
+          <!-- Post reactions -->
+          <div class="post-reactions" id="post-reactions" style="display: none;">
+            <div class="reaction-emojis">
+              <span class="reaction-emoji">👍</span>
+              <span class="reaction-emoji">❤️</span>
+              <span class="reaction-emoji">🙌</span>
+              <span class="reaction-count" id="reaction-count">1,247</span>
+            </div>
+            <div class="reaction-right">
+              <span id="comment-count">312 comments</span>
+              <span>•</span>
+              <span>48 reposts</span>
+            </div>
+          </div>
+
+          <!-- Post actions -->
+          <div class="post-actions" id="post-actions" style="display: none;">
+            <button class="action-btn">
+              <span>👍</span> Like
+            </button>
+            <button class="action-btn">
+              <span>💬</span> Comment
+            </button>
+            <button class="action-btn">
+              <span>🔁</span> Repost
+            </button>
+            <button class="action-btn">
+              <span>📤</span> Send
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Copy button (below the card) -->
+        <div class="card-footer" id="card-footer" style="display: none;">
+          <button class="copy-btn" id="copy-btn" onclick="copyPost()">
+            📋 Copy Post
+          </button>
+          <button class="regenerate-btn" onclick="generatePost()">
+            🔄 Regenerate
+          </button>
+          <button class="more-cringe-btn" onclick="moreCringe()">
+            🤮 More Cringe
+          </button>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
