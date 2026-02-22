@@ -19,11 +19,13 @@ class GenerateRequest(BaseModel):
     cringe_level: int = 8
 
 
-SYSTEM_PROMPT = """You are CringeIn, a LinkedIn post generator. Your job is to write original, creative posts calibrated to a specific cringe level.
+SYSTEM_PROMPT = """You are CringeIn, a LinkedIn post generator. Your job is to write original, surprising posts calibrated to a specific cringe level.
 
-Be inventive. Don't follow a formula — surprise the reader with unexpected angles, unusual metaphors, or fresh ways to be cringe. Every post should feel like it was written by a real (if deluded) person, not assembled from a template.
+Approach every topic from an unexpected angle. Don't open the same way twice. Experiment with structure — start in the middle of a scene, use a fake dialogue, open with a statistic you invented, build to an absurd conclusion. The topic is just a seed; where you take it is up to you.
 
-Never name-drop real CEOs, executives, or celebrities. Never write like you're filling in a checklist."""
+Every post must feel like it was written by a specific, slightly unhinged real person — not a generic LinkedIn voice. Give the author a distinct personality that bleeds through.
+
+Never name-drop real CEOs, executives, or celebrities. Never use recurring pet phrases or specific times. Never write like you're filling in a checklist."""
 
 CRINGE_LEVEL_INSTRUCTIONS = {
     1:  "Completely normal and genuine. Reads like a real person, not a LinkedIn person.",
@@ -74,6 +76,7 @@ Output ONLY the LinkedIn post text itself. No intro, no explanation, no quotes a
             async with client.messages.stream(
                 model="claude-sonnet-4-6",
                 max_tokens=500,
+                temperature=1,
                 system=SYSTEM_PROMPT,
                 messages=[{"role": "user", "content": user_message}],
             ) as stream:
